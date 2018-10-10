@@ -100,8 +100,7 @@ class Test{
 				$posts_pages = ceil($posts_count / $posts_per_page );
 				$users_pages = ceil($users_count / $users_per_page );
 				$ads_pages = ceil($ads_count / $ads_per_page );
-				$surveys_pages = ceil($survyes_count / $surveys_per_page );
-				
+				$surveys_pages = ceil($survyes_count / $surveys_per_page );				
 				
 				$max_pages = max($posts_pages, $users_pages, $ads_pages, $surveys_pages);
 				
@@ -111,20 +110,16 @@ class Test{
 				
 				/*
 				For infinitive loop , we find the remainder of pages
-				*/
-				
+				*/				
 				if($page > $posts_pages ){
 					$posts_page = $page - $posts_pages*floor($page / $posts_pages);
-				}
-				
+				}				
 				if($page > $users_pages ){
 					$users_page = $page - $users_pages*floor($page / $users_pages);
-				}
-				
+				}				
 				if($page > $ads_pages ){
 					$ads_page = $page - $ads_pages*floor($page / $ads_pages );
-				}
-				
+				}				
 				if($page > $surveys_pages ){
 					$surveys_page = $page - $surveys_pages*floor($page / $surveys_pages);
 				}
