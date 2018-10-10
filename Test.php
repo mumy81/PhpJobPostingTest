@@ -34,17 +34,13 @@ class Test{
 	* $file : File type, for databse connection settings	
 	*
  	***/
-	public function __construct($file = 'db_settings.ini'){
-		
-		if (!$settings = parse_ini_file($file, TRUE)) throw new exception('Unable to open ' . $file . '.');
-        
-        $dns = $settings['database']['driver'] .
-        ':host=' . $settings['database']['host'] .
-        ((!empty($settings['database']['port'])) ? (';port=' . $settings['database']['port']) : '') .
-		';dbname=' . $settings['database']['schema'];
-		
+	public function __construct($settings){		       
+        	$dns = $settings['driver'] .
+        	':host=' . $settings['host'] .
+       		((!empty($settings['port'])) ? (';port=' . $settings['port']) : '') .
+			';dbname=' . $settings['schema'];		
 		try {
-			$this->pdo = new \PDO($dns, $settings['database']['username'], $settings['database']['password']);
+			$this->pdo = new \PDO($dns, $settings['username'], $settings['password']);
 			//PDO objemize ozelliklerimizi atiyoruz, hata modunu aciyoruz
 			$this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			}catch(Exception $e){
@@ -83,6 +79,7 @@ class Test{
 				}
 				}
 				
+				//Counts of table rows
 				$posts_count = $this->pdo->query('SELECT COUNT(id) FROM Post', PDO::FETCH_COLUMN);
 				$users_count = $this->pdo->query('SELECT COUNT(id) FROM User', PDO::FETCH_COLUMN);
 				$ads_count = $this->pdo->query('SELECT COUNT(id) FROM Advertisement', PDO::FETCH_COLUMN);
@@ -102,6 +99,7 @@ class Test{
 				$ads_pages = ceil($ads_count / $ads_per_page );
 				$surveys_pages = ceil($survyes_count / $surveys_per_page );				
 				
+				//Maximum numbers of page
 				$max_pages = max($posts_pages, $users_pages, $ads_pages, $surveys_pages);
 				
 				if($page > $max_pages){
@@ -315,14 +313,15 @@ class Test{
 	***/
 	function listUserByLocationUpdated(){
 		try{ 
-			$sql = 'SELECT U.id, U.name, U.surname, U.email, L.location_address, L.location_latitude, L.location_longitude, L.updated_at
+			$sql = "SELECT U.id, U.name, U.surname, U.email, L.location_address, L.location_latitude, L.location_longitude, L.updated_at
 			FROM Users U
 			INNER JOIN Locations L ON U.id = L.user_id
 			WHERE U.status = :status
-			ORDER BY L.updated_at DESC';
+			ORDER BY L.updated_at DESC";
 
-			$query = $this->pdo->prepare($sql);			
-			$query->bindParam(':status', 'ACCEPTED', PDO::PARAM_STR); 
+			$query = $this->pdo->prepare($sql);
+			$status='ACCEPTED';			
+			$query->bindParam(':status', $status, PDO::PARAM_STR); 
 			$query->execute();
 			return $query->fetchAll(PDO::FETCH_ASSOC);
 			
@@ -330,5 +329,4 @@ class Test{
 			throw $e;
 		}
 	}	
-	}
-	
+	}	

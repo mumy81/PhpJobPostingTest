@@ -5,7 +5,10 @@ require('Test.php');
  * Params: Database bilgileri bulunan .ini dosyasi
  *  
  */
-$test_obj = new Test('db_settings.ini');
+$db_settings = ['driver' => 'mysql','host' => 'localhost','port' => '3306',
+'schema' => 'test','username' => 'root','password' => ''];
+
+$test_obj = new Test($db_settings);
 
 /**
  * 
@@ -34,4 +37,3 @@ $test_obj->getPaginationResults(3);
 $test_obj->listUserByLocationUpdated();
 
 ?>
-
