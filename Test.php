@@ -34,7 +34,7 @@ class Test{
 	* $file : File type, for databse connection settings	
 	*
  	***/
-	public function __construct($file = 'my_setting.ini'){
+	public function __construct($file = 'db_settings.ini'){
 		
 		if (!$settings = parse_ini_file($file, TRUE)) throw new exception('Unable to open ' . $file . '.');
         
