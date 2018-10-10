@@ -5,9 +5,7 @@ require('Test.php');
  * Params: Database bilgileri bulunan .ini dosyasi
  *  
  */
-$test_obj = new Test('my_setting.ini');
-
-
+$test_obj = new Test('db_settings.ini');
 
 /**
  * 
@@ -28,7 +26,6 @@ $test_obj = new Test('my_setting.ini');
  *   Aşağıdaki şekilde $page=3 parametresi verildiği için 3.sayfadaki sonuçarı verir.
  */
 $test_obj->getPaginationResults(3);
-
 
 /**
  * Challenge 2.Soru:
