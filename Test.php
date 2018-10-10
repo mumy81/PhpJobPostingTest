@@ -18,7 +18,7 @@
 class Test{	
 
 	/*
-	my_setting.ini:
+	db_settings.ini:
 	[database]
 	driver = mysql
 	host = localhost
@@ -128,8 +128,7 @@ class Test{
 				$offset_posts = ($posts_page-1)*$posts_per_page;
 				$offset_users = ($users_page-1)*$users_per_page;
 				$offset_ads = ($ads_page-1)*$ads_per_page;
-				$offset_surveys = ($surveys_page-1)*$surveys_per_page;
-				
+				$offset_surveys = ($surveys_page-1)*$surveys_per_page;				
 						
 				// Asagida kullanilan find* foksiyonlari $limit ve $offset parametlerini sirasiyla alir ve bu degelere gore db'den sorgu sonucu FETCH_ASSOC ile array seklinde return ederler
 				//son 30 postu aliyoruz
@@ -330,28 +329,6 @@ class Test{
 		}catch(Exception $e){
 			throw $e;
 		}
-	}
-
-	
-	
-	function test(){
-		$sql = 'SELECT * FROM mock LIMIT 30 OFFSET 0';
-		$sql2 = 'SELECT first_name, last_name, email FROM mock LIMIT 10 OFFSET 0';
-		
-		$query = $this->pdo->prepare($sql);
-		$query->execute();
-		$result = $query->fetchAll(\PDO::FETCH_ASSOC);
-
-		$query2 = $this->pdo->prepare($sql2);
-		$query2->execute();
-		$result2 = $query2->fetchAll(\PDO::FETCH_ASSOC);
-
-		$resultArray = ['first' =>$result, 'second'=>$result2];
-		header('Content-type: application/json');
-		print json_encode($resultArray, JSON_FORCE_OBJECT);
-
-	}
-
-	
+	}	
 	}
 	
