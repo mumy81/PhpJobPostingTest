@@ -65,9 +65,11 @@ class Test{
 	 * 
 	 * Sonsuz seklinde return yapar, butun tabloardaki rowlar biterse en bastan 1'den baslayarak gostermeye devam eder.
 	 * Ornegin Post tablosun 3000 satir var, Survey tablosunde 20 satir var.
-	 * Maksimum sayfa 100 olabilir cunku 3000 post var, fakat 20.sayfadan sonra 21.sayfada ilk survey tekrar goruntulenir,
-	 * 24.sayfada 4.survey goruntulenir, tabloda az elemanı bulunanlar, sayfa sayisi kendi maksimum sayfa sayisini gecerse , tekrar bastan saymaya baslarlar.
-	 * 	
+	 * Maksimum sayfa 3000/30 = 100 olabilir , fakat 20.sayfadan sonra gosterilcek anket sona geldiigi icin
+	 * 21.sayfada ilk survey tekrar goruntulenir, 24.sayfada 4.survey goruntulenir,
+	 * tabloda az elemanı bulunanlar, talep edilen sayfa sayisi kendi maksimum sayfa sayisini gecerse , 
+	 * tekrar 1'den yukari saymaya baslarlar.	 
+	 *  	
 	***/
 	function getPaginationResults($page=1){
 			try { 
